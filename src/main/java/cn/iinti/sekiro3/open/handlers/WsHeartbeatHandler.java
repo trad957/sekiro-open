@@ -21,6 +21,7 @@ public class WsHeartbeatHandler extends IdleStateHandler {
             case READER_IDLE:
                 // 客户端需要在 SERVER_READ_IDLE - SERVER_READ_WRITE (默认 15s) 内回复
                 // 没有回复则会触发该事件，关闭客户端连接
+                System.out.println("Ws Client READER_IDLE timeout, close channel");
                 recorder.recordEvent("Client READER_IDLE timeout, close channel");
                 ctx.channel().close();
                 break;
