@@ -1,0 +1,8 @@
+version: '3'
+services:
+  sekiro_server:
+    image: sekiro-server
+    container_name: sekiro-server
+    privileged: true
+    ports:
+      - "5612:5612"
