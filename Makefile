@@ -4,6 +4,6 @@ port = 5612
 
 # 定义build目标
 image:
-	docker build --build-arg SEKIRO_PORT=$(port) -t $(image_name):$(port) .
+	docker build -t $(image_name) .
 
 .PHONY: image
