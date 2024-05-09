@@ -10,6 +10,14 @@ WORKDIR /app
 # 将当前目录下的所有文件拷贝到镜像的工作目录下
 COPY . .
 
+# 定义构建参数
+ARG SEKIRO_PORT
+
+# 使用sed命令替换config.properties文件中的端口
+RUN if [ -n "$SEKIRO_PORT" ]; then \
+    sed -i "s/sekiro.port=.*/sekiro.port=$SEKIRO_PORT/" src/main/resources/config.properties; \
+    fi
+
 # 运行脚本构建项目
 RUN chmod +x ./build_demo_server.sh \
     && ./build_demo_server.sh \

@@ -1,9 +1,0 @@
-# 定义变量
-IMAGE_NAME = my_image
-SEKIRO_PORT = 5612
-
-# 定义build目标
-build:
-	docker build --build-arg SEKIRO_PORT=$(SEKIRO_PORT) -t $(IMAGE_NAME):$(SEKIRO_PORT) .
-
-.PHONY: build
