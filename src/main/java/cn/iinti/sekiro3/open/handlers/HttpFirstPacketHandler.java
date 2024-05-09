@@ -73,15 +73,14 @@ public class HttpFirstPacketHandler extends ChannelInboundHandlerAdapter {
         }
 
         if (session.getProxyTarget() == null) {
-            httpRequest.headers().add("sekiro-demo", "true");
-            if (uriPath.startsWith("/sekiro-doc")) {
-                httpRequest.headers().set(HttpHeaders.Names.HOST, "sekiro.iinti.cn");
-                session.setProxyTarget(new IpAndPort("sekiro.iinti.cn", 5612));
-            } else {
-                httpRequest.headers().set(HttpHeaders.Names.HOST, "iinti.cn");
-                session.setProxyTarget(new IpAndPort("iinti.cn", 80));
-            }
-            httpRequest.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.CLOSE);
+            // Create a 404 response
+            DefaultFullHttpResponse response = new DefaultFullHttpResponse(
+                    HttpVersion.HTTP_1_1,
+                    HttpResponseStatus.NOT_FOUND
+            );
+            // Write and flush the response
+            ctx.writeAndFlush(response);
+            return;
         }
 
         connectUpstream();
